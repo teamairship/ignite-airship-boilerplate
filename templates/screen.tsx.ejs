@@ -1,0 +1,24 @@
+import React, { Component} from "react"
+import { View } from 'react-native'
+import { NavigationScreenProps } from "react-navigation"
+import { Text } from "../../components"
+
+type Props = NavigationScreenProps & {}
+
+class <%= props.name %> extends Component<Props, {}> {
+  render () {
+    return (
+      <View style={styles.container}>
+        <Text><%= props.name %> Screen</Text>
+      </View>
+    )
+  }
+}
+
+const styles = StyleSheet.create({
+  container: {
+    //
+  }
+});
+
+export default <%= props.name %>;

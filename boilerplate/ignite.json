@@ -1,0 +1,8 @@
+{
+  "createdWith": "2.2.4",
+  "boilerplate": "ignite-airship-boilerplate",
+  "generators": {
+    "component": "ignite-airship-boilerplate",
+    "screen": "ignite-airship-boilerplate"
+  }
+}
