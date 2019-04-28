@@ -46,7 +46,7 @@ class FirstScreen extends Component<Props, State> {
 
   renderPokemon = () => {
     const { error, loading, pokemon } = this.state;
-    if (error) return error;
+    if (error) return <Text>error</Text>;
     if (loading) return <Text>Loading...</Text>;
     return (
       <FlatList

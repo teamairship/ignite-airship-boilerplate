@@ -66,12 +66,19 @@ async function install (context) {
     { template: 'app.json.ejs', target: 'app.json' },
     { template: 'babel.config.js', target: 'babel.config.js' },
     { template: 'index.js', target: 'index.js' },
+    { template: 'ignite.json.ejs', target: 'ignite/ignite.json' },
     { template: 'package.json.ejs', target: 'package.json' },
     { template: 'tsconfig.json', target: 'tsconfig.json' }
   ]
-  await ignite.copyBatch(context, templates, { name: name }, {
+
+  const templateProps = {
+    name,
+    igniteVersion: ignite.version
+  }
+
+  await ignite.copyBatch(context, templates, templateProps, {
     quiet: true,
-    directory: `${PLUGIN_PATH}/boilerplate`
+    directory: `${ignite.ignitePluginPath()}/boilerplate`
   })
   spinner.stop()
 
@@ -80,6 +87,15 @@ async function install (context) {
   spinner.start()
   await system.run('yarn')
   spinner.stop()
+
+   // pass long the debug flag if we're running in that mode
+   const debugFlag = parameters.options.debug ? '--debug' : ''
+
+  // boilerplate adds itself to get plugin.js/generators etc
+    // Could be directory, npm@version, or just npm name.  Default to passed in values
+  const boilerplate = '../../ignite-airship-boilerplate'
+
+  await system.spawn(`ignite add ${boilerplate} ${debugFlag}`, { stdio: 'inherit' })
 
   // react native link -- must use spawn & stdio: ignore or it hangs!! :(
   spinner.text = `▸ linking native libraries`
@@ -90,18 +106,18 @@ async function install (context) {
   // install any plugins, including ourselves if we have generators.
   // please note you should always do `stdio: 'inherit'` or it'll hang
 
-  try {
-    // pass along the debug flag if we're running in that mode
-    const debugFlag = parameters.options.debug ? '--debug' : ''
+  // try {
+  //   // pass along the debug flag if we're running in that mode
+  //   const debugFlag = parameters.options.debug ? '--debug' : ''
 
-    await system.spawn(`ignite add ${__dirname} ${debugFlag}`, { stdio: 'inherit' })
+  //   await system.spawn(`ignite add ${__dirname} ${debugFlag}`, { stdio: 'inherit' })
 
-    // example of another plugin you could install
-    // await system.spawn(`ignite add i18n ${debugFlag}`, { stdio: 'inherit' })
-  } catch (e) {
-    ignite.log(e)
-    throw e
-  }
+  //   // example of another plugin you could install
+  //   // await system.spawn(`ignite add i18n ${debugFlag}`, { stdio: 'inherit' })
+  // } catch (e) {
+  //   ignite.log(e)
+  //   throw e
+  // }
 
   // Wrap it up with our success message.
   print.info('')
