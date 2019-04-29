@@ -103,22 +103,6 @@ async function install (context) {
   await system.spawn('react-native link', { stdio: 'ignore' })
   spinner.stop()
 
-  // install any plugins, including ourselves if we have generators.
-  // please note you should always do `stdio: 'inherit'` or it'll hang
-
-  // try {
-  //   // pass along the debug flag if we're running in that mode
-  //   const debugFlag = parameters.options.debug ? '--debug' : ''
-
-  //   await system.spawn(`ignite add ${__dirname} ${debugFlag}`, { stdio: 'inherit' })
-
-  //   // example of another plugin you could install
-  //   // await system.spawn(`ignite add i18n ${debugFlag}`, { stdio: 'inherit' })
-  // } catch (e) {
-  //   ignite.log(e)
-  //   throw e
-  // }
-
   // Wrap it up with our success message.
   print.info('')
   print.info('🍽 Installed!')
