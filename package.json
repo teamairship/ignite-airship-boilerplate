@@ -1,5 +1,5 @@
 {
-  "name": "ignite-airship-boilerplate",
+  "name": "@airship/ignite-airship-boilerplate",
   "description": "A description of your plugin.",
   "version": "0.0.1",
   "license": "MIT",
@@ -29,5 +29,3 @@
     "standard": "^8.6.0"
   }
 }
-
-
