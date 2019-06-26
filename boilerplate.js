@@ -7,14 +7,14 @@
  *
  */
 
-const REACT_NATIVE_VERSION = '0.59.5'
+const REACT_NATIVE_VERSION = '0.59.9'
 
 /**
  * Let's install.
  *
  * @param {any} context - The gluegun context. Docs: https://infinitered.github.io/gluegun/#/context-api.md
  */
-async function install (context) {
+async function install(context) {
   const APP_PATH = process.cwd()
   const PLUGIN_PATH = __dirname
 
@@ -88,11 +88,11 @@ async function install (context) {
   await system.run('yarn')
   spinner.stop()
 
-   // pass long the debug flag if we're running in that mode
-   const debugFlag = parameters.options.debug ? '--debug' : ''
+  // pass long the debug flag if we're running in that mode
+  const debugFlag = parameters.options.debug ? '--debug' : ''
 
   // boilerplate adds itself to get plugin.js/generators etc
-    // Could be directory, npm@version, or just npm name.  Default to passed in values
+  // Could be directory, npm@version, or just npm name.  Default to passed in values
   const boilerplate = '@airship/ignite-airship-boilerplate'
 
   await system.spawn(`ignite add ${boilerplate} ${debugFlag}`, { stdio: 'inherit' })
