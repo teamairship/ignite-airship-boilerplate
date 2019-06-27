@@ -13,7 +13,7 @@ export const MainNavigator = createStackNavigator(
   },
   {
     headerMode: "none",
-    navigationOptions: { gesturesEnabled: false }
+    defaultNavigationOptions: { gesturesEnabled: false }
   }
 );
 
