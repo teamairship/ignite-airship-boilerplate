@@ -1,5 +1,7 @@
 # Ignite Airship Boilerplate
 
+Based on the [Bowser Ignite boilerplate](https://github.com/infinitered/ignite-bowser).
+
 ```
 npx ignite new AppName -b @airship/ignite-airship-boilerplate
 ```

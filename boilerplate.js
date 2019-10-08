@@ -51,7 +51,7 @@ async function install(context) {
       "react-native run-android",
     )} successfully until you have.`
 
-  const name = parameters.third
+  const name = parameters.first
   const spinner = print
     .spin(`using the ${print.colors.cyan('AirshipBoilerplate')} boilerplate`)
     .succeed()
