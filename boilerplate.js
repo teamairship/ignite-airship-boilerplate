@@ -89,7 +89,7 @@ async function install(context) {
     { template: '.env', target: '.env' },
     { template: '.eslintrc', target: '.eslintrc' },
     { template: '.gitattributes', target: '.gitattributes' },
-    { template: '.gitignore', target: '.gitignore' },
+    { template: '.gitignore.ejs', target: '.gitignore' },
     { template: '.watchmanconfig', target: '.watchmanconfig' },
     { template: 'app.json.ejs', target: 'app.json' },
     { template: 'babel.config.js', target: 'babel.config.js' },
