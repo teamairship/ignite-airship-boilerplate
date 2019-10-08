@@ -1,7 +1,7 @@
 # Ignite Airship Boilerplate
 
 ```
-yarn global add ignite-cli
+npx ignite new AppName -b @airship/ignite-airship-boilerplate
 ```
 
 ## Generators

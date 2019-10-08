@@ -1,20 +1,21 @@
-import { createAppContainer, createStackNavigator } from "react-navigation";
-import FirstScreen from "../screens/FirstScreen";
-import SecondScreen from "../screens/SecondScreen";
+import { createAppContainer } from 'react-navigation';
+import { createStackNavigator } from 'react-navigation-stack';
+import FirstScreen from '../screens/FirstScreen';
+import SecondScreen from '../screens/SecondScreen';
 
 const ExampleNavigator = createStackNavigator({
   FirstScreen: { screen: FirstScreen },
-  SecondScreen: { screen: SecondScreen }
+  SecondScreen: { screen: SecondScreen },
 });
 
 export const MainNavigator = createStackNavigator(
   {
-    exampleStack: { screen: ExampleNavigator }
+    exampleStack: { screen: ExampleNavigator },
   },
   {
-    headerMode: "none",
-    navigationOptions: { gesturesEnabled: false }
-  }
+    headerMode: 'none',
+    navigationOptions: { gesturesEnabled: false },
+  },
 );
 
 export const RootNavigator = createAppContainer(MainNavigator);
