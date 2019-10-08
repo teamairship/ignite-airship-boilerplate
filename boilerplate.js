@@ -1,5 +1,6 @@
 const { merge, pipe, assoc, omit, __ } = require("ramda")
 const { getReactNativeVersion } = require("./lib/react-native-version")
+const { addBuildConfigurations, addSchemes, addBundleIdSuffixes } = require("./lib/ios")
 
 // We need this value here, as well as in our package.json.ejs template
 const REACT_NATIVE_GESTURE_HANDLER_VERSION = "^1.3.0"
@@ -160,6 +161,34 @@ async function install(context) {
   const local = parameters.options.local
   const boilerplate = `${local ? '../../' : ''}${parameters.options.b}` || parameters.options.boilerplate || "@airship/ignite-airship-boilerplate"
   await system.spawn(`ignite add ${boilerplate} ${debugFlag}`, { stdio: 'inherit' })
+
+  // Add App Center
+  await ignite.addModule('appcenter')
+  await ignite.addModule('appcenter-analytics')
+  await ignite.addModule('appcenter-crashes')
+  await ignite.addModule('react-native-code-push')
+
+
+  // Add iOS "Staging" Scheme & Build Configuration
+  await addSchemes(context)
+  await addBuildConfigurations(context, 'ABC123') // TODO: Wireup team ID
+  await addBundleIdSuffixes(context)
+
+
+  // Add Android staging build flavor
+  const GRADLE_FILE_PATH = `${process.cwd()}/android/app/build.gradle`
+  const buildFlavors = `
+    releaseStaging {
+      minifyEnabled enableProguardInReleaseBuilds
+      proguardFiles getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro"
+      matchingFallbacks = ['release']
+    }
+    `
+  await ignite.patchInFile(GRADLE_FILE_PATH, {
+    insert: buildFlavors,
+    before: 'release {'
+  })
+
 
   await ignite.addModule("react-native-gesture-handler", {
     version: REACT_NATIVE_GESTURE_HANDLER_VERSION,
